@@ -4,7 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 import boto3 as boto3
 import json
 import time
-AWS_PROFILE = 'KLAM-'
+AWS_PROFILE = '<<ADD-NAME-PROFILE>>'
 AMIDictionary = {}
 
 
@@ -88,7 +88,7 @@ def listEC2InstanceAMIs(region):
 
 
    #Now that we have the dictionary with the amiID and the count of instances, we can add more information for each AMI in parallel
-   with ThreadPoolExecutor(20) as executor:
+   with ThreadPoolExecutor() as executor:
        executor.map(getAMIInfo, AMIDictionary.keys())
 
 
