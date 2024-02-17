@@ -72,8 +72,7 @@ def listEC2InstanceAMIs(region):
    ec2_resource = session.client('ec2')
    #create a paginator to get all instances and all the information about them
    paginator = ec2_resource.get_paginator('describe_instances')
-
-
+ 
    #paginate the results so you don't get issues with the 1000 instance limit
    #there might be a way to parallelise this but since it's just an API call to AWS I don't think it's worth it
    for page in paginator.paginate():
@@ -86,7 +85,7 @@ def listEC2InstanceAMIs(region):
                    AMIDictionary[instance["ImageId"]]["countOfInstances"]  += 1
                    AMIDictionary[instance["ImageId"]]["InstanceIds"].append(instance["InstanceId"])
 
-
+    
    #Now that we have the dictionary with the amiID and the count of instances, we can add more information for each AMI in parallel
    with ThreadPoolExecutor() as executor:
        executor.map(getAMIInfo, AMIDictionary.keys())
