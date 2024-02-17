@@ -112,9 +112,10 @@ def listInstancesInAllRegions():
 if __name__ == "__main__":
 
 
-   start_time = time.time()
+   startTime = time.time()
 
-
-   listEC2InstanceAMIs('us-east-1')
-   print("--- %s seconds ---" % (time.time() - start_time))
+   
+   regionToBeQueried = 'us-east-1'
+   listEC2InstanceAMIs(regionToBeQueried)
+   print("--- %s seconds ---" % (time.time() - startTime))
 
